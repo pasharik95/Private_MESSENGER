@@ -1,0 +1,26 @@
+#ifndef WORK_WITH_DB_H
+#define WORK_WITH_DB_H
+
+#include <stdio.h>
+#include <sqlite3.h>
+#include <stdlib.h>
+#include "common.h"
+
+sqlite3 *db;
+int  rc;
+char *sql; 
+
+void initDB(); // creating DB
+
+static int callback(void *NotUsed, int argc, char **argv, char **azColName); // show result of request to DB
+int checkUser(char *name, char *password); // check user's name and password
+int getIdUser(char *name); // get id by user's name
+int getSockUser(char *name); // get value of sock by user's name 
+char getStatus(char *name); // get user's status
+void addUser(char *name, char *password, int sock); // add new user
+void updateSock(int id, int sock); // update user's sock
+void updateStatus(int id, char status); // update user's status
+char *getAll(char *name_user, char status); // get all users
+char **getConnectedUsers(int id, int *n); // get only users who is connected to server
+
+#endif
